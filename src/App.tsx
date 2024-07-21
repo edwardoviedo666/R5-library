@@ -1,22 +1,25 @@
 import React from 'react'
-import SearchInput from './components/SearchInput'
-import {BookType} from './components/Book'
-import Books from './components/Books'
+import {BookType} from "./components/Book";
+import AppRoutes from "./routes/app-routes";
 
+
+/*
 interface Response {
-  data?: {
-    items: BookType[]
-  }
+    data?: {
+        items: BookType[]
+    }
 }
+*/
 
-const App = () =>  {
-  const [response, setResponse] = React.useState<Response>({})
-  return (
-    <div>
-      <SearchInput setResponse={setResponse} />
-	{response.data && <Books books={response.data.items} /> }
-    </div>
-  )
+const App = () => {
+    //const [response, setResponse] = React.useState<Response>({})
+    return (
+        <AppRoutes/>
+        /*<div>
+          <SearchInput setResponse={setResponse} />
+        {response.data && <Books books={response.data.items} /> }
+        </div>*/
+    )
 }
 
 
