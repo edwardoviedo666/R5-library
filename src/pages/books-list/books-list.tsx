@@ -10,7 +10,6 @@ interface Response {
     }
 }
 
-
 const BooksList = () => {
     const [response, setResponse] = useState<Response>({})
     return (
