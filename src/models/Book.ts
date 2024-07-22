@@ -29,5 +29,19 @@ class Book implements IBook {
     }
 }
 
+type BookType = {
+    id: string
+    volumeInfo: {
+        title: string
+        imageLinks: {
+            thumbnail: string
+        }
+    }
+}
+
+interface Response {
+    items: IBook[]
+}
+
 export default Book;
-export type {IBook};
+export type {IBook, BookType, Response};

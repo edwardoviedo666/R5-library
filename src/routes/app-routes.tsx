@@ -1,5 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import BooksList from "../pages/books-list/books-list";
+import BooksDetails from "../pages/books-details/books-details";
 
 
 const AppRoutes = () => {
@@ -7,7 +8,7 @@ const AppRoutes = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<BooksList/>}/>
-                <Route path="/bookStore" element={<h1>Ruta hija</h1>}/>
+                <Route path="/bookStore" element={<BooksDetails/>}/>
             </Routes>
         </BrowserRouter>
     )

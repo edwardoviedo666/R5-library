@@ -19,8 +19,7 @@ const getBookByTitle = async (url: string, title: string = "javascript"): Promis
         const URL = url.replace("{my-search}", title)
         const response = await axios.get<IBook[]>(`${URL}`);
         const infoBooks = handleResponse<any>(response);
-        console.log("informacion de libros: ", infoBooks)
-        return mapApiToBooks(infoBooks.items)
+        return infoBooks.items
     } catch (error) {
         handleError(error);
         return []

@@ -1,6 +1,7 @@
 import React, {ChangeEvent, MouseEventHandler} from 'react'
 import axios from 'axios'
 import './SearchInput.css'
+import {uuidV4} from "../../utils/uuidv4";
 
 interface SearchInputProps {
     setSearchValue: Function,

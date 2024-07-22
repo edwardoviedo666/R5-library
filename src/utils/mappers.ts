@@ -1,11 +1,5 @@
-import {IBook} from "../models/Book";
-import {BookType} from "../components/Book";
+import {BookType, IBook} from "../models/Book";
 
-interface Response {
-    data?: {
-        items: BookType[]
-    }
-}
 
 export const mapApiToBook = (apiBook: BookType): IBook => {
     return {

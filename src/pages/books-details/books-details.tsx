@@ -1,8 +1,7 @@
+import React, {useEffect} from "react";
+import {useBooksByTitle} from "../../hooks/books-details/useBooksByTitle";
 import SearchInput from "../../components/SearchInput";
-import React, {useEffect, useState} from "react";
 import {Books} from "../../components/Books";
-import {useBooksByTitle} from "../../hooks/books-list/useBooksByTitle";
-import "../../assets/styles/general.css"
 
 const BooksList = () => {
     const [searchValue, setSearchValue] = React.useState("")
