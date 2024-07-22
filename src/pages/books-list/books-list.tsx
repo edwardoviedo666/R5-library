@@ -1,7 +1,10 @@
 import SearchInput from "../../components/SearchInput";
 import Books from "../../components/Books";
 import {BookType} from "../../components/Book";
-import {useState} from "react";
+import React, {useState} from "react";
+import {getBookByTitle} from "../../services/bookService";
+import {API_BASE_URL_GOOGLE} from "../../utils/constants";
+import {IBook} from "../../models/Book";
 
 
 interface Response {
@@ -11,11 +14,19 @@ interface Response {
 }
 
 const BooksList = () => {
-    const [response, setResponse] = useState<Response>({})
+    const [searchValue, setSearchValue] = React.useState("")
+
+    const [response, setResponse] = useState<IBook[]>()
+    const handleSearch = async () => {
+        const listBooks = await getBookByTitle(API_BASE_URL_GOOGLE, searchValue)
+        console.log("listado de libros: ", listBooks)
+        setResponse(listBooks)
+
+    }
     return (
         <div>
-            <SearchInput setResponse={setResponse}/>
-            {response.data && <Books books={response.data.items}/>}
+            <SearchInput value={searchValue} setSearchValue={setSearchValue} handleSearch={handleSearch}/>
+            {response && <Books books={response}/>}
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import './book.css'
+import {IBook} from "../../models/Book";
 
 export type BookType = {
     id: string
@@ -12,19 +13,18 @@ export type BookType = {
 }
 
 export interface BookProps {
-    key: string
-    book: BookType
+    book: IBook
 }
 
-const Book = ({book, key}: BookProps) => (
-    <div key={key} className="book">
+const Book = ({book}: BookProps) => (
+    <div id={book.id as string} className="book">
         <div className="book-image">
-            {book.volumeInfo.imageLinks ? <img
-                    alt={book.volumeInfo.title}
-                    src={book.volumeInfo.imageLinks.thumbnail}/>
+            {book.image ? <img
+                    alt={book.title}
+                    src={book.image}/>
                 : <img src="https://picsum.photos/200/260" alt="default"/>}
         </div>
-        <p className="book-title">{book.volumeInfo.title}</p>
+        <p className="book-title">{book.title}</p>
     </div>
 )
 

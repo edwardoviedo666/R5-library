@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {IBook} from "../models/Book";
-import {mapApiToBook, mapApiToBooks} from "../utils/mappers";
+import {mapApiToBooks} from "../utils/mappers";
 
 const API_URL = `/books`;
 
@@ -14,12 +14,13 @@ const handleError = (error: any): never => {
     throw error
 }
 
-const getBookByTitle = async (title: string = "javascript", url: string): Promise<IBook[]> => {
+const getBookByTitle = async (url: string, title: string = "javascript"): Promise<IBook[]> => {
     try {
-        const URL = url.replace("my-search", title)
+        const URL = url.replace("{my-search}", title)
         const response = await axios.get<IBook[]>(`${URL}`);
-        const infoBooks = handleResponse<IBook[]>(response);
-        return mapApiToBooks(infoBooks)
+        const infoBooks = handleResponse<any>(response);
+        console.log("informacion de libros: ", infoBooks)
+        return mapApiToBooks(infoBooks.items)
     } catch (error) {
         handleError(error);
         return []
