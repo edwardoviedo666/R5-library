@@ -7,7 +7,7 @@ import "../../assets/styles/general.css"
 const BooksList = () => {
     const [searchValue, setSearchValue] = React.useState("")
     const [newSearch, setNewSearch] = React.useState("")
-    const {books, loading, error} = useBooksByTitle(newSearch)
+    const {listBooks, loading, error} = useBooksByTitle(newSearch)
     useEffect(() => {
         setNewSearch("javascript")
     }, []);
@@ -18,10 +18,11 @@ const BooksList = () => {
     }
     return (
         <div>
-            <SearchInput value={searchValue} setSearchValue={setSearchValue} handleSearch={handleSearch}/>
+            <SearchInput title="GOOGLE BOOKS" value={searchValue} setSearchValue={setSearchValue}
+                         handleSearch={handleSearch}/>
             <section className="section-lis-books">
                 {loading && <p>Cargando...</p>}
-                {books && <Books books={books}/>}
+                {listBooks && <Books books={listBooks}/>}
             </section>
         </div>
     )

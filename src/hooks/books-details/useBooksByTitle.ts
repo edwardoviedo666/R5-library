@@ -1,19 +1,24 @@
 import {useState, useEffect} from 'react';
 import {IBook} from "../../models/Book";
+import {API_BASE_URL_GOOGLE, API_BASE_URL_OPEN_API} from "../../utils/constants";
+import {mapApiToBooks, mapApiToOpenBooks} from "../../utils/mappers";
 import {getBookByTitle} from "../../services/bookService";
-import {API_BASE_URL_OPEN_API} from "../../utils/constants";
+import {useDispatch, useSelector} from "react-redux";
 
 
-export const useBooksByTitle = (title: string) => {
-    const [books, setBooks] = useState<IBook[]>([]);
+export const useOpenBooksByTitle = (title: string) => {
+    const [listBooks, setListBooks] = useState<IBook[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchBooks = async () => {
+            if (!title) return
             try {
+                setListBooks([])
+                setLoading(true);
                 const booksData = await getBookByTitle(API_BASE_URL_OPEN_API, title);
-                setBooks(booksData);
+                setListBooks(mapApiToOpenBooks(booksData));
             } catch (err) {
                 setError('Failed to fetch books.');
             } finally {
@@ -23,6 +28,5 @@ export const useBooksByTitle = (title: string) => {
 
         fetchBooks().then(r => r);
     }, [title]);
-
-    return {books, loading, error};
+    return {listBooks, loading, error};
 };

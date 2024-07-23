@@ -14,12 +14,12 @@ const handleError = (error: any): never => {
     throw error
 }
 
-const getBookByTitle = async (url: string, title: string = "javascript"): Promise<IBook[]> => {
+const getBookByTitle = async (url: string, title: string = "javascript"): Promise<[]> => {
     try {
         const URL = url.replace("{my-search}", title)
         const response = await axios.get<IBook[]>(`${URL}`);
         const infoBooks = handleResponse<any>(response);
-        return infoBooks.items
+        return infoBooks.items ? infoBooks.items : infoBooks.docs
     } catch (error) {
         handleError(error);
         return []

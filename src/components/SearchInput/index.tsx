@@ -4,12 +4,13 @@ import './SearchInput.css'
 import {uuidV4} from "../../utils/uuidv4";
 
 interface SearchInputProps {
+    title: string,
     setSearchValue: Function,
     value: string
     handleSearch: MouseEventHandler<HTMLButtonElement>
 }
 
-const SearchInput = ({value, setSearchValue, handleSearch}: SearchInputProps) => {
+const SearchInput = ({title, value, setSearchValue, handleSearch}: SearchInputProps) => {
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         setSearchValue(event.target.value)
@@ -21,7 +22,7 @@ const SearchInput = ({value, setSearchValue, handleSearch}: SearchInputProps) =>
       }*/
     return (
         <div className="search">
-            <h1>GOOGLE BOOKS</h1>
+            <h1>{title}</h1>
             <input
                 className="search-input"
                 type="text"

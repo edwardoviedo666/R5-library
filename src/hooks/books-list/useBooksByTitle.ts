@@ -1,12 +1,13 @@
 import {useState, useEffect} from 'react';
 import {IBook} from "../../models/Book";
 import {getBookByTitle} from "../../services/bookService";
-import {API_BASE_URL_GOOGLE} from "../../utils/constants";
+import {API_BASE_URL_GOOGLE, API_BASE_URL_OPEN_API} from "../../utils/constants";
 import {mapApiToBooks} from "../../utils/mappers";
 
 
+
 export const useBooksByTitle = (title: string) => {
-    const [books, setBooks] = useState<IBook[]>([]);
+    const [listBooks, setListBooks] = useState<IBook[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -14,10 +15,10 @@ export const useBooksByTitle = (title: string) => {
         const fetchBooks = async () => {
             if (!title) return
             try {
-                setBooks([])
+                setListBooks([])
                 setLoading(true);
                 const booksData = await getBookByTitle(API_BASE_URL_GOOGLE, title);
-                setBooks(mapApiToBooks(booksData));
+                setListBooks(mapApiToBooks(booksData));
             } catch (err) {
                 setError('Failed to fetch books.');
             } finally {
@@ -28,5 +29,5 @@ export const useBooksByTitle = (title: string) => {
         fetchBooks().then(r => r);
     }, [title]);
 
-    return {books, loading, error};
+    return {listBooks, loading, error};
 };

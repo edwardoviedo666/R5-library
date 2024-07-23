@@ -1,0 +1,6 @@
+.comments {
+    margin-top: 20px;
+    display: grid;
+    grid-gap: 5px;
+    background: antiquewhite;
+}
